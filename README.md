@@ -40,7 +40,7 @@
 
 ## 📄 YAML Policy Structure
 
-System Hardener uses YAML-based policy definitions for flexibility and ease of updates. Each rule defines what needs to be audited or remediated.
+
 
 | Field                         | Description                                              |
 | ----------------------------- | -------------------------------------------------------- |
