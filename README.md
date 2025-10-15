@@ -2,8 +2,6 @@
 
 # System Hardener
 
-**System Hardener** is a cross-platform security auditing and remediation tool designed to help administrators enforce system hardening policies on Windows and Linux systems. It provides an intuitive GUI, automated auditing, snapshot-based remediation, rollback capabilities, and detailed logging for compliance tracking.
-
 ---
 
 ## 🌟 Key Features
@@ -36,7 +34,7 @@
 ## 🎨 Application Showcase
 
 ![UI Showcase](assets/showcase.png)
-*Example of System Hardener GUI interface*
+
 
 ---
 
