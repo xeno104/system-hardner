@@ -1,0 +1,171 @@
+levels:
+  basic:
+  - accPol-a-02
+  - accPol-a-03
+  moderate:
+  - accPol-a-01
+  - accPol-a-02
+  - accPol-a-03
+  - accPol-a-04
+  - accPol-b-01
+  strict:
+  - accPol-a-01
+  - accPol-a-02
+  - accPol-a-03
+  - accPol-a-04
+  - accPol-a-05
+  - accPol-a-06
+  - accPol-b-01
+  - accPol-b-02
+rules:
+- id: accPol-a-01
+  category: Account Password Policy
+  title: Enforce password history
+  description: Ensure 'Enforce password history' is set to 24 or more passwords.
+  severity: high
+  level: basic
+  parameter_name: PASS_HISTORY
+  default_remediation_value: 24
+  check_command:
+  - net accounts | findstr /C:"Length of password history maintained"
+  remediation_command:
+  - net accounts /uniquepw:{value}
+  rollback_value:
+  - 24
+  enabled: true
+  logic:
+    operator: '>='
+    value: 24
+- id: accPol-a-02
+  category: Account Password Policy
+  title: Maximum password age
+  description: Ensure 'Maximum password age' is set to 90 days, but not 0.
+  severity: medium
+  level: basic
+  parameter_name: PASS_MAX_DAYS
+  default_remediation_value: 90
+  check_command:
+  - net accounts | findstr /C:"Maximum password age (days)"
+  remediation_command:
+  - net accounts /maxpwage:{value}
+  rollback_value:
+  - 12
+  enabled: true
+  logic:
+    operator: ==
+    value: 90
+- id: accPol-a-03
+  category: Account Password Policy
+  title: Minimum password age
+  description: Ensure 'Minimum password age' is set to 1 day.
+  severity: medium
+  level: basic
+  parameter_name: PASS_MIN_DAYS
+  default_remediation_value: 1
+  check_command:
+  - net accounts | findstr /C:"Minimum password age (days)"
+  remediation_command:
+  - net accounts /minpwage:{value}
+  rollback_value:
+  - 1
+  enabled: true
+  logic:
+    operator: '>='
+    value: 1
+- id: accPol-a-04
+  category: Account Password Policy
+  title: Minimum password length
+  description: Ensure 'Minimum password length' is set to 12 or more characters.
+  severity: medium
+  level: basic
+  parameter_name: PASS_MIN_LENGTH
+  default_remediation_value: 12
+  check_command:
+  - net accounts | findstr /C:"Minimum password length"
+  remediation_command:
+  - net accounts /minpwlen:{value}
+  rollback_value:
+  - 12
+  enabled: true
+  logic:
+    operator: '>='
+    value: 12
+- id: accPol-a-05
+  category: Account Password Policy
+  title: Password must meet complexity requirements
+  description: Ensure 'Password must meet complexity requirements' is enabled.
+  severity: high
+  level: basic
+  parameter_name: PASS_COMPLEXITY
+  default_remediation_value: 1
+  check_command:
+  - powershell -Command "if ((Get-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Lsa'
+    -Name PasswordComplexity -ErrorAction SilentlyContinue).PasswordComplexity -eq
+    1) { Write-Output '1' } else { Write-Output '0' }"
+  remediation_command:
+  - powershell -Command "Set-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Lsa'
+    -Name 'PasswordComplexity' -Value {value}"
+  rollback_value:
+  - 1
+  enabled: true
+  logic:
+    operator: ==
+    value: 1
+- id: accPol-a-06
+  category: Account Password Policy
+  title: Store passwords using reversible encryption
+  description: Ensure 'Store passwords using reversible encryption' is disabled.
+  severity: high
+  level: basic
+  parameter_name: PASS_REVERSIBLE
+  default_remediation_value: 0
+  check_command:
+  - powershell -Command "if ((Get-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Lsa'
+    -Name ClearTextPassword -ErrorAction SilentlyContinue).ClearTextPassword -eq 1)
+    { Write-Output '1' } else { Write-Output '0' }"
+  remediation_command:
+  - powershell -Command "Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa'
+    -Name ClearTextPassword -Value {value}"
+  rollback_value:
+  - 0
+  enabled: true
+  logic:
+    operator: ==
+    value: 0
+- id: accPol-b-01
+  category: Account Lockout Policy
+  title: Account lockout duration
+  description: Ensure 'Account lockout duration' is set to 15 or more minutes.
+  severity: high
+  level: basic
+  parameter_name: LOCKOUT_DURATION
+  default_remediation_value: 15
+  check_command:
+  - net accounts | findstr /C:"Lockout duration"
+  remediation_command:
+  - net accounts /lockoutduration:{value}
+  rollback_value:
+  - 15
+  enabled: true
+  logic:
+    operator: '>='
+    value: 15
+- id: accPol-b-02
+  category: Account Lockout Policy
+  title: Account lockout threshold
+  description: Ensure 'Account lockout threshold' is set to 5 or fewer invalid logon
+    attempts, but not 0.
+  severity: high
+  level: basic
+  parameter_name: LOCKOUT_THRESHOLD
+  default_remediation_value: 5
+  check_command:
+  - net accounts | findstr /C:"Lockout threshold"
+  remediation_command:
+  - net accounts /lockoutthreshold:{value}
+  rollback_value:
+  - 5
+  enabled: true
+  logic:
+    operator: <=
+    value: 5
