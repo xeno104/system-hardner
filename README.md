@@ -92,7 +92,7 @@ rules:
 ### Install Dependencies
 
 ```bash
-python -m pip install -r requirements.py
+python requirements.py
 ```
 
 ### Run the GUI Application
