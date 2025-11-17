@@ -3,7 +3,7 @@ import sys
 
 packages = [
     "PyYAML>=6.0",
-    "reportlab>=4.0"
+    "reportlab>=4.0",
     "fpdf>=1.7.2",
 ]
 
