@@ -4,7 +4,7 @@
 
 ---
 
-## 🌟 Key Features
+## Key Features
 
 | Feature                        | Description                                                                | Status |
 | ------------------------------ | -------------------------------------------------------------------------- | ------ |
@@ -18,7 +18,7 @@
 
 ---
 
-## 🚀 Planned Improvements
+## Improvements
 
 * Expand policy coverage with additional rules from **Annexure_A_B.pdf** in the `assets` folder.
 
@@ -31,14 +31,14 @@
 
 ---
 
-## 🎨 Application Showcase
+## Application Showcase
 
 ![UI Showcase](assets/showcase.png)
 
 
 ---
 
-## 📄 YAML Policy Structure
+## YAML Policy Structure
 
 
 
@@ -60,7 +60,7 @@
 
 ---
 
-## 📝 Example Policy (`policy.yaml`)
+## Example Policy (`policy.yaml`)
 
 ```yaml
 rules:
@@ -86,7 +86,7 @@ rules:
 
 ---
 
-## ⚡ Installation & Setup
+## Installation & Setup
 
 
 ### Install Dependencies
@@ -103,7 +103,7 @@ python GUI.py
 
 
 
-## 📂 Directory Structure
+## Directory Structure
 
 ```
 System Hardner
